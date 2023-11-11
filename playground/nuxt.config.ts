@@ -3,10 +3,11 @@ import * as mockData from './mock-data';
 export default defineNuxtConfig({
   modules: ['../src/module'],
   liff: {
-    liffId: '1656948270-xz4QnBz4',
+    liffId: 'valid-liff-id-here',
     mock: true,
     mockData: {
-      profile: mockData.getProfile(),
+      getProfile: mockData.getProfile(),
+      getOS: 'android',
     },
   },
   devtools: { enabled: true },

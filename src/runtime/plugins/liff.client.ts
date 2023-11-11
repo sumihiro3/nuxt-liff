@@ -3,7 +3,8 @@ import liff from '@line/liff';
 import { LiffMockPlugin } from '@line/liff-mock';
 import type { ModuleOptions } from '../../module';
 
-export default defineNuxtPlugin(async (_nuxtApp) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default defineNuxtPlugin(async (nuxtApp) => {
   const nuxtLiffConfig = useRuntimeConfig().public.liff;
   if (!nuxtLiffConfig) {
     throw new Error('liff module is not configured');
@@ -13,16 +14,13 @@ export default defineNuxtPlugin(async (_nuxtApp) => {
   console.log(`liffConfig: ${JSON.stringify(liffConfig)}}`);
   console.log(`LIFF ID: ${liffConfig.liffId}`);
   console.log(`Mock mode: ${liffConfig.mock}`);
-  console.log(`profile: ${liffConfig.mockData?.profile}`);
   if (liffConfig.mock) {
-    // mock mode で起動する
+    // LIFF Mock Plugin を登録する
     liff.use(new LiffMockPlugin());
-    // set mock profile
+    // mock data を設定する
     liff.$mock.set((p) => ({
       ...p,
-      getProfile: liffConfig.mockData?.profile
-        ? liffConfig.mockData?.profile
-        : p.getProfile,
+      ...liffConfig.mockData, // module options で指定された mock data を上書きする
     }));
   }
   // initialize LIFF app

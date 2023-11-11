@@ -1,14 +1,26 @@
-import type { Profile } from '@liff/get-profile';
+import type { MockData } from '@line/liff-mock/dist/store/MockDataStore';
 import { addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit';
 import { fileURLToPath } from 'url';
 
 // Module options TypeScript interface definition
 export interface ModuleOptions {
+  /**
+   * LIFF ID
+   * @default ''
+   */
   liffId: string;
+
+  /**
+   * LIFF Mock を有効にするかどうか
+   * @default false
+   */
   mock: boolean;
-  mockData?: {
-    profile?: Profile;
-  };
+
+  /**
+   * LIFF Mock で使用するデータ
+   * @default {}
+   */
+  mockData: Partial<MockData>;
 }
 
 export default defineNuxtModule<ModuleOptions>({

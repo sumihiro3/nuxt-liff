@@ -11,7 +11,7 @@
     </tr>
     <tr>
       <td>getOS</td>
-      <td>{{ os }}</td>
+      <td data-testid="getOS">{{ os }}</td>
     </tr>
     <tr>
       <td>getLanguage</td>

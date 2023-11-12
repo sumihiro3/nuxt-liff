@@ -1,15 +1,17 @@
-import { $fetch, setup } from '@nuxt/test-utils';
+import { createPage, setup } from '@nuxt/test-utils';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
-describe('ssr', async () => {
+describe('page', async () => {
   await setup({
-    rootDir: fileURLToPath(new URL('./fixtures/basic', import.meta.url)),
+    rootDir: fileURLToPath(new URL('../playground', import.meta.url)),
+    browser: true,
+    dev: true,
   });
 
   it('renders the index page', async () => {
-    // Get response to a server-rendered page with `$fetch`.
-    const html = await $fetch('/');
-    expect(html).toContain('<div>basic</div>');
+    const page = await createPage('/');
+    expect(page.getByText('nuxt-liff module playground!')).toBeTruthy();
+    expect(await page.getByTestId('getOS').textContent()).toContain('android');
   });
 });

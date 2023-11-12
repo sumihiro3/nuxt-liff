@@ -1,6 +1,7 @@
 import * as mockData from './mock-data';
 
 export default defineNuxtConfig({
+  // ssr: false,
   modules: ['../src/module'],
   // モジュール設定
   liff: {

@@ -1,58 +1,84 @@
-<!--
-Get your module up and running quickly.
-
-Find and replace all on all files (CMD+SHIFT+F):
-- Name: My Module
-- Package name: my-module
-- Description: My new Nuxt module
--->
-
-# My Module
+# Nuxt LIFF Module
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-My new Nuxt module for doing amazing things.
+This module makes it easy to deploy LIFF.
 
-- [✨ &nbsp;Release Notes](/CHANGELOG.md)
-<!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/my-module?file=playground%2Fapp.vue) -->
+It also supports mock mode using `LIFF Mock`, making it easy to test LIFF apps.
+
+<!-- - [✨ &nbsp;Release Notes](/CHANGELOG.md) -->
+<!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/nuxt-liff?file=playground%2Fapp.vue) -->
 <!-- - [📖 &nbsp;Documentation](https://example.com) -->
+
+## About LIFF (LINE Front-end Framework)
+
+The [LINE Front-end Framework (LIFF)](https://developers.line.biz/en/services/liff/) is a web application framework provided by LY Corporation. When you integrate the LIFF SDK into your web app, you will be able to access information provided by the LINE Platform or use functionalities provided by the LINE app.
+
+## About LIFF Mock
+
+[LIFF Mock](https://developers.line.biz/en/docs/liff/liff-plugin/#liff-mock) is a LIFF plugin to make testing your LIFF app easy. Using LIFF Mock, you can add the mock mode to the LIFF SDK. In the mock mode, your LIFF app is independent of the LIFF server and the LIFF API returns mock data. Therefore, you can perform unit testing or load testing more easily.
 
 ## Features
 
 <!-- Highlight some of the features your module provide here -->
-- ⛰ &nbsp;Foo
-- 🚠 &nbsp;Bar
-- 🌲 &nbsp;Baz
+- ⛰ &nbsp;Just set your LIFF ID and you are ready to use LIFF!
+- 🚠 &nbsp;Mock mode is available with a single setting
+- 🌲 &nbsp;Customize the response from LIFF in mock mode
 
 ## Quick Setup
 
-1. Add `my-module` dependency to your project
+### 1. Add `nuxt-liff` dependency to your project
 
 ```bash
 # Using pnpm
-pnpm add -D my-module
+pnpm add -D nuxt-liff
 
 # Using yarn
-yarn add --dev my-module
+yarn add --dev nuxt-liff
 
 # Using npm
-npm install --save-dev my-module
+npm install --save-dev nuxt-liff
 ```
 
-2. Add `my-module` to the `modules` section of `nuxt.config.ts`
+### 2. Add `nuxt-liff` to the `modules` section of `nuxt.config.ts`
 
 ```js
 export default defineNuxtConfig({
   modules: [
-    'my-module'
+    'nuxt-liff'
   ]
 })
 ```
 
-That's it! You can now use My Module in your Nuxt app ✨
+### 3. Configure module settings
+
+```js
+import * as mockData from './mock-data';
+
+export default defineNuxtConfig({
+  modules: [
+    'nuxt-liff'
+  ],
+  // Module settings
+  liff: {
+    // Specify your LIFF ID
+    liffId: 'your-liff-id-here',
+    // Set to true to use mock mode
+    mock: true,
+    // When using mock mode, you can set mock data for each API
+    // @see https://developers.line.biz/en/reference/liff/
+    mockData: {
+      getProfile: mockData.getProfile(),
+      getOS: 'android',
+    },
+  },
+});
+```
+
+That's it! You can now use Nuxt LIFF Module in your Nuxt app ✨
 
 ## Development
 
@@ -81,14 +107,14 @@ npm run release
 ```
 
 <!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/my-module/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-version-href]: https://npmjs.com/package/my-module
+[npm-version-src]: https://img.shields.io/npm/v/nuxt-liff/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-version-href]: https://npmjs.com/package/nuxt-liff
 
-[npm-downloads-src]: https://img.shields.io/npm/dm/my-module.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-downloads-href]: https://npmjs.com/package/my-module
+[npm-downloads-src]: https://img.shields.io/npm/dm/nuxt-liff.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-downloads-href]: https://npmjs.com/package/nuxt-liff
 
-[license-src]: https://img.shields.io/npm/l/my-module.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://npmjs.com/package/my-module
+[license-src]: https://img.shields.io/npm/l/nuxt-liff.svg?style=flat&colorA=18181B&colorB=28CF8D
+[license-href]: https://npmjs.com/package/nuxt-liff
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com
